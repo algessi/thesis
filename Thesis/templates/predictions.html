@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Resource Predictions</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJpJ6vQH+aU5tuP3Pb5dwYugotg+5C3R4VqcbJlT6/iB7sFnJCTV/x7T3I/c" crossorigin="anonymous">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .page-title {
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 32px;
+            color: #343a40;
+            font-weight: bold;
+        }
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .table-container {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: white;
+            padding: 20px;
+        }
+        .btn-refresh {
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-refresh:hover {
+            background-color: #0056b3;
+        }
+        .thead-dark {
+            background-color: #343a40;
+            color: white;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+        }
+        .card {
+            border: none;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Page Title -->
+    <div class="page-title">
+        <h2>Hospital Resource Predictions</h2>
+        <p>These predictions are based on historical data for doctors, staff, and bed availability.</p>
+    </div>
+
+    <!-- Predictions Card -->
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card table-container">
+                <div class="card-header">
+                    Predicted Resources for the Next Days
+                </div>
+                <div class="card-body">
+                    <!-- Table of Predictions -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Doctors Available</th>
+                                    <th scope="col">Staff Available</th>
+                                    <th scope="col">Beds Available</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if predictions %}
+                                    {% for prediction in predictions %}
+                                    <tr>
+                                        <td>{{ prediction[0] }}</td>
+                                        <td>{{ prediction[1] }}</td>
+                                        <td>{{ prediction[2] }}</td>
+                                        <td>{{ prediction[3] }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">No predictions available</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Refresh Predictions Button -->
+            <div class="d-flex justify-content-center mt-4">
+                <a href="/predictions" class="btn-refresh">Refresh Predictions</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js for interactivity -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gyb7Q9AY5fNO6wFvybIc6v01FovB9fkhQpSfISvJfDbSYo9rR2P" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eylqL+Y6mA0tZKZLvQpJ6fOz4uO9P0pmK7x9kd3s0M0jjY5JwvKKduB" crossorigin="anonymous"></script>
+
+</body>
+</html>
